@@ -1,0 +1,6 @@
+[submodule "bug-tracker"]
+	path = bug-tracker
+	url = https://github.com/renan-aquino/bug-tracker.git
+[submodule "bug-tracker-api"]
+	path = bug-tracker-api
+	url = https://github.com/renan-aquino/bug-tracker-api.git
