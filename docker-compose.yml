@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: bugTracker
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: masterkey
+    ports:
+      - "5432:5432" 
+    restart: always
+    networks:
+      - mynetwork
+
+  api:
+    build: "./bug-tacker-api"
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    networks:
+      - mynetwork
+
+  web:
+    build: "./bug-tracker"
+    environment:
+      - NEXT_PUBLIC_BASE_URL=http://web:3000
+      - NEXT_PUBLIC_API_URL=http://api:8080
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+     - database
+     - api 
+    networks:
+      - mynetwork
