@@ -10,10 +10,12 @@ services:
       - "5432:5432" 
     restart: always
     networks:
-      - mynetwork
+      - my-network
 
   api:
-    build: "./bug-tacker-api"
+    build:
+      context: ./bug-tracker-api
+      dockerfile: Dockerfile
     environment:
       DB_HOST: postgres
       DB_PORT: 5432
@@ -21,20 +23,20 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - database
+      - postgres
     networks:
-      - mynetwork
+      - my-network
 
   web:
     build: "./bug-tracker"
-    environment:
-      - NEXT_PUBLIC_BASE_URL=http://web:3000
-      - NEXT_PUBLIC_API_URL=http://api:8080
     restart: always
     ports:
       - "3000:3000"
     depends_on:
-     - database
+     - postgres
      - api 
     networks:
-      - mynetwork
+      - my-network
+
+networks:
+  my-network:
