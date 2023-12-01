@@ -3,7 +3,7 @@
 
 ## Overview
 
-Bug Tracker is a platform for reporting bugs in the form of tickets, and documenting their details and progress with comments posted by users of the same team.  
+Bug Tracker is a platform for reporting bugs by documenting them with tickets, as well as their progress with comments posted by users of the same team.  
 The application runs in a docker container through docker compose.
 
 ## Features
